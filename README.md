@@ -40,6 +40,7 @@ The DSL supports the following section types:
 
 1. Fork this repository on GitHub
 2. Clone your fork:
+
    ```bash
    git clone https://github.com/YOUR-USERNAME/agentic-dsl-example.git
    cd agentic-dsl-example
@@ -49,22 +50,91 @@ The DSL supports the following section types:
 
 This project requires a React environment. To use with Next.js, Vite, or Create React App:
 
-1. **Next.js** (recommended):
+#### Option 1: Next.js (recommended)
+
+1. Create a new Next.js project:
+
    ```bash
    npx create-next-app@latest my-landing-page
    cd my-landing-page
-   # Copy landing-page.jsx into your project
-   # Install Tailwind CSS: https://tailwindcss.com/docs/guides/nextjs
    ```
 
-2. **Vite**:
+2. Install Tailwind CSS:
+
+   ```bash
+   npm install -D tailwindcss postcss autoprefixer
+   npx tailwindcss init -p
+   ```
+
+3. Configure Tailwind in `tailwind.config.js`:
+
+   ```javascript
+   /** @type {import('tailwindcss').Config} */
+   module.exports = {
+     content: [
+       "./app/**/*.{js,ts,jsx,tsx,mdx}",
+       "./pages/**/*.{js,ts,jsx,tsx,mdx}",
+       "./components/**/*.{js,ts,jsx,tsx,mdx}",
+     ],
+     theme: {
+       extend: {},
+     },
+     plugins: [],
+   }
+   ```
+
+4. Add Tailwind directives to your CSS (e.g., `app/globals.css` or `styles/globals.css`):
+
+   ```css
+   @tailwind base;
+   @tailwind components;
+   @tailwind utilities;
+   ```
+
+5. Copy `landing-page.jsx` into your project and use it in your pages
+
+#### Option 2: Vite
+
+1. Create a new Vite project:
+
    ```bash
    npm create vite@latest my-landing-page -- --template react
    cd my-landing-page
    npm install
-   # Copy landing-page.jsx into src/
-   # Install Tailwind CSS: https://tailwindcss.com/docs/guides/vite
    ```
+
+2. Install Tailwind CSS:
+
+   ```bash
+   npm install -D tailwindcss postcss autoprefixer
+   npx tailwindcss init -p
+   ```
+
+3. Configure Tailwind in `tailwind.config.js`:
+
+   ```javascript
+   /** @type {import('tailwindcss').Config} */
+   export default {
+     content: [
+       "./index.html",
+       "./src/**/*.{js,ts,jsx,tsx}",
+     ],
+     theme: {
+       extend: {},
+     },
+     plugins: [],
+   }
+   ```
+
+4. Add Tailwind directives to `src/index.css`:
+
+   ```css
+   @tailwind base;
+   @tailwind components;
+   @tailwind utilities;
+   ```
+
+5. Copy `landing-page.jsx` into `src/` and import it in your app
 
 ### Usage
 
@@ -147,7 +217,7 @@ The DSL uses Tailwind CSS utility classes. To customize:
 
 ## Project Structure
 
-```
+```text
 landing-page.jsx
 ├── Type System       # TypeScript types defining the DSL schema
 ├── Validation        # Runtime validation functions
